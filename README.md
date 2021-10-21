@@ -30,10 +30,19 @@ Note. Each cpp and python file is documented. Please open the files for more det
 3. Get Candidate Edges and save them into "candidate_edges.csv"
       1. >`python3 getCandidateEdges.py -i random_source_nodes.csv -d "distance" -o "candidate_edges.csv"`  
 4. Converts the graph file to compatible form for positive sample. We specify the graph file, the output file and the number of the sample expressed as percentage of the number of the graph's edges.
-      1. >`python3 getPositiveEdgeSample.py -g "out_graph.txt" "-p", "100", "-o", "positive_edge_sample.csv`  
+      1. >`python3 getPositiveEdgeSample.py -g "out_graph.txt" -p, "100", -o, "positive_edge_sample.csv`  
 5. Get negative edges sample.
-      1. >`python3 getNegativeEdgeSample.py -g "out_graph.txt" "-p", "100", "-o", "negative_edge_sample.csv`  
-
+      1. >`python3 getNegativeEdgeSample.py -g "out_graph.txt" -p "100" -o "negative_edge_sample.csv`  
+6. Get Node embeddings
+   1. node2vec
+      1. >`python3 getNodeEmbeddings.py -g "out_graph.txt" -p, "node2vec" --l "distance" -pp "1.0", --qp "1.0" -o, "node2vec_node_embeddings.csv`  
+   1. FairWalk
+      1. >`python3 getNodeEmbeddings.py -g "out_graph.txt" -p, "fairwalk" --l "distance" -pp "1.0", --qp "1.0" -o, "fairwalk_node_embeddings.csv`  
+7. Get Node embeddings
+   1. node2vec
+      1. >`python3 getNodeEmbeddings.py -g "out_graph.txt" -p, "node2vec" --l "distance" -pp "1.0", --qp "1.0" -o, "node2vec_node_embeddings.csv`  
+   1. FairWalk
+      1. >`python3 getNodeEmbeddings.py -g "out_graph.txt" -p, "fairwalk" --l "distance" -pp "1.0", --qp "1.0" -o, "fairwalk_node_embeddings.csv`  
 We also included in the Experiments folder three python files that contain the execution pipeline for computing the results reported in the paper. 
 
 * Pre experiments script.
