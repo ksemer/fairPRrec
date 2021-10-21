@@ -5,7 +5,7 @@ from time import time
 
 rounds = "10"
 distance = "4"
-path = "/mnt/sdb1/tsiou/wisdom2021/code/"
+path = ""
 
 # 23. Run Experiment Score and Acceptance probabilities
 # run(["cp", path + "ExperimentScripts/experiment_one_fairness.py", "."])

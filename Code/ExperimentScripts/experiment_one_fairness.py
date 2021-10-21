@@ -44,7 +44,7 @@ log = pd.DataFrame()
 r = list()
 
 # Call cpp script.
-run(["cp", "/mnt/sdb1/tsiou/FairRec/Code/CppFiles/compute_scores_per_round.out", "."])
+run(["cp", "Code/CppFiles/compute_scores_per_round.out", "."])
 run(["./compute_scores_per_round.out"])
 with open("temp_score.txt", "r") as file_one:
     score = float(file_one.readline())
@@ -66,7 +66,7 @@ for i in range(rounds):
         for k, l in edges:
             edge_file.write(f"{k},{l}\n")
     # Call cpp script.
-    run(["cp", "/mnt/sdb1/tsiou/FairRec/Code/CppFiles/compute_scores_per_round.out", "."])
+    run(["cp", "Code/CppFiles/compute_scores_per_round.out", "."])
     run(["./compute_scores_per_round.out"])
     with open("temp_score.txt", "r") as file_one:
         score = float(file_one.readline())

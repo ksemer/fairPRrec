@@ -40,7 +40,7 @@ for key in scores_dict:
     scores_dict[key].sort(key=lambda x: x[1], reverse=True)
 
 # Call cpp script.
-run(["cp", "/mnt/sdb1/tsiou/FairRec/Code/CppFiles/compute_personalized_scores_per_round.out", "."])
+run(["cp", "compute_personalized_scores_per_round.out", "."])
 run(["./compute_personalized_scores_per_round.out"])
 personalized_scores = pd.read_csv("temp_score.txt")
 personalized_scores.to_csv(f"{output_file}_round_{-1}.csv", index=False)
@@ -61,7 +61,7 @@ for i in range(rounds):
         for k, l in edges:
             edge_file.write(f"{k},{l}\n")
     # Call cpp script.
-    run(["cp", "/mnt/sdb1/tsiou/FairRec/Code/CppFiles/compute_personalized_scores_per_round.out", "."])
+    run(["cp", "Code/CppFiles/compute_personalized_scores_per_round.out", "."])
     run(["./compute_personalized_scores_per_round.out"])
     personalized_scores = pd.read_csv("temp_score.txt")
     personalized_scores.to_csv(f"{output_file}_round_{i}.csv", index=False)

@@ -41,17 +41,41 @@ Note. Each cpp and python file is documented. Please open the files for more det
       >`python3 getNodeEmbeddings.py -g "out_graph.txt" -p, "fairwalk" --l "distance" -pp "1.0", --qp "1.0" -o, "fairwalk_node_embeddings.csv`  
 7. Get Edge embeddings
    1. node2vec
-      >`python3 getEdgeEmbeddings.py -l "node2vec_node_embeddings.csv" -e, "candidate_edges.csv" -p "hadamrt" -o "candidate_edges_node2vec_embeddings.csv`  
-     >`python3 getEdgeEmbeddings.py -l "node2vec_node_embeddings.csv" -e, "positive_edge_sample.csv" -p "hadamrt" -o "positive_sample_edges_node2vec_embeddings.csv` 
-     >`python3 getEdgeEmbeddings.py -l "node2vec_node_embeddings.csv" -e, "negative_edge_sample.csv" -p "hadamrt" -o "negative_sample_edges_node2vec_embeddings.csv`   
+     * >`python3 getEdgeEmbeddings.py -l "node2vec_node_embeddings.csv" -e, "candidate_edges.csv" -p "hadamrt" -o "candidate_edges_node2vec_embeddings.csv`  
+     * >`python3 getEdgeEmbeddings.py -l "node2vec_node_embeddings.csv" -e, "positive_edge_sample.csv" -p "hadamrt" -o "positive_sample_edges_node2vec_embeddings.csv` 
+     * >`python3 getEdgeEmbeddings.py -l "node2vec_node_embeddings.csv" -e, "negative_edge_sample.csv" -p "hadamrt" -o "negative_sample_edges_node2vec_embeddings.csv`   
    2. FairWalk
-      >`python3 getEdgeEmbeddings.py l "fairwalk_node_embeddings.csv" -e, "candidate_edges.csv" -p "hadamrt" -o, "candidate_edges_fairwalk_embeddings.csv`  
-     >`python3 getEdgeEmbeddings.py -l "fairwalk_node_embeddings.csv" -e, "positive_edge_sample.csv" -p "hadamrt" -o "positive_sample_edges_fairwalk_embeddings.csv`  
-     >`python3 getEdgeEmbeddings.py -l "fairwalk_node_embeddings.csv" -e, "negative_edge_sample.csv" -p "hadamrt" -o "negative_sample_edges_node2vec_embeddings.csv`
+      * >`python3 getEdgeEmbeddings.py l "fairwalk_node_embeddings.csv" -e, "candidate_edges.csv" -p "hadamrt" -o, "candidate_edges_fairwalk_embeddings.csv`  
+      * >`python3 getEdgeEmbeddings.py -l "fairwalk_node_embeddings.csv" -e, "positive_edge_sample.csv" -p "hadamrt" -o "positive_sample_edges_fairwalk_embeddings.csv`  
+      * >`python3 getEdgeEmbeddings.py -l "fairwalk_node_embeddings.csv" -e, "negative_edge_sample.csv" -p "hadamrt" -o "negative_sample_edges_node2vec_embeddings.csv`
 8. Get node2vec and fairwalk classifier
-    >`python3 getClassifier.py -p "positive_sample_edges_node2vec_embeddings.csv" -n "negative_sample_edges_node2vec_embeddings.csv" -o "node2vec_recommender.sav"`
+     * >`python3 getClassifier.py -p "positive_sample_edges_node2vec_embeddings.csv" -n "negative_sample_edges_node2vec_embeddings.csv" -o "node2vec_recommender.sav"`
+     * >`python3 getClassifier.py -p "positive_sample_edges_fairwalk_embeddings.csv" -n "negative_sample_edges_fairwalk_embeddings.csv" -o "fairwalk_recommender.sav"`
+9. Get red absorbing probabilities
+    * >`python3 getRedAbsorbingProbs.py" -g "out_graph.txt" -o "red_absorbing_probabilities.csv"`
 
-We also included in the ExperimentScripts folder three python files that contain the execution pipeline for computing the results reported in the paper. 
+10. Get link recommendation algorithms fairness scores
+    * Adamic Adar: >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "adamic_adar" -o "adamic_adar_scores.csv"`
+    * Jaccard Coefficient: >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "jaccard-coefficient" -o "jaccard_coefficient_scores.csv"`
+    * Preferential Attachment: >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "preferential-attachment" -o "preferential_attachment_scores.csv"`
+    * Node2vec:  >`python3 getRecommendationScores.py -i "candidate_edges_node2vec_embeddings.csv" -p "from-classifier" -o "node2vec_scores.csv"`
+    * Fairwalk:  >`python3 getRecommendationScores.py -i "candidate_edges_fairwalk_embeddings.csv" -p "from-classifier" -c "fairwalk_recommender.sav" -o "node2vec_scores.csv"`
+11. Get FREC, E-FREC, PREC, and E-PREC red pageranks
+    * >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "fair" -o "frec.csv"`
+    * >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "dyadic-fair" -o "e-frec.csv"`
+    * >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "multiplicative-hybrid" -f "frec.csv" -c "node2vec_scores.csv" -o "prec.csv"`
+    * >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "multiplicative-hybrid" -f "e-frec.csv" -c "node2vec_scores.csv" -o "e-prec.csv"`
+12. Compute the PageRank Fairness per round
+    * rounds: 10, algo_scores: the file computed in steps 10 and 11.Also have a look at `experiments_pipeline.py`
+    * >`python3 experiment_one_fairness.py -r "rounds" -s "algo_scores" -o "sc_output
+13. Compute Acceptance Probability per round
+    * rounds: 10, algo_scores: the file computed in steps 10 and 11.Also have a look at `experiments_pipeline.py`
+    * >`python3 experiment_two_acceptance.py -r "rounds" -s "algo_scores" -n "node2vec_scores" -o "accept_prob.csv"
+14. Compute the personalized PageRank Fairness per round
+    * rounds: 10, algo_scores: the file computed in steps 10 and 11.Also have a look at `experiments_pipeline.py`
+    * >`python3 experiment_three_acceptance.py -r "rounds" -s "algo_scores" -o "sc_personalized_output
+
+ - We also included in the ExperimentScripts folder three python files that contain the execution pipeline for computing the results reported in the paper. 
 
 * Pre experiments script.
 
@@ -98,6 +122,7 @@ Nodes' ids should be from 0 to n without missing numbers. The same holds for gro
 
 In the datasets provided we have done the forth mentioned preprocessing. In cases where nodes in the graph hadn't have group information we removed them from the graph. We have also kept only the largest weak component of each graph.
 
+#### Notebooks contain the code for exporting the plots and constructing the latex tables.
 ### Datasets:
 
 1. Blogs
