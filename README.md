@@ -18,7 +18,58 @@ All the experiments were made in linux Ubuntu. To compile cpp we used gcc compil
    - Datasets
    - Experiments
 
-### How to run the experiments:<br/> 
+### Experiments:<br/> 
+The following refers to the steps needed to compute the results reported in the paper.
+Note. Each cpp and python file is documented. Please open the files for more details.
+1. Compute Nodes PageRank
+   1. Copy "getPageRank.out" from the Cpp_files and execute: 
+      1. >`./getPagerank.out`
+2. Get random source nodes and save them into "random_source_nodes.csv"
+   1. copy "getSourceNodes.py" from the Python_files and execute: 
+      1. >`python3 getSourceNodes.py -p "random" -a "source_nodes_ratio" -o "random_source_nodes.csv"`  
+3. Get Candidate Edges and save them into "candidate_edges.csv"
+      1. >`python3 getCandidateEdges.py -i random_source_nodes.csv -d "distance" -o "candidate_edges.csv"`  
+4. Converts the graph file to compatible form for positive sample. We specify the graph file, the output file and the number of the sample expressed as percentage of the number of the graph's edges.
+      1. >`python3 getPositiveEdgeSample.py -g "out_graph.txt" "-p", "100", "-o", "positive_edge_sample.csv`  
+5. Get negative edges sample.
+      1. >`python3 getNegativeEdgeSample.py -g "out_graph.txt" "-p", "100", "-o", "negative_edge_sample.csv`  
+
+We also included in the Experiments folder three python files that contain the execution pipeline for computing the results reported in the paper. 
+
+* Pre experiments script.
+
+    Computes the following:
+    
+    1. Initial pagerank.
+    2. Red absorbing probabilities.
+    3. Node2vec Classifier.
+    4. Node2vec embeddings.
+    5. Source nodes (10% random, 100 best red, 100 best blue).
+    6. Edges' scores.
+    7. Candidate edges distances.
+    8. Network's quality features.
+    9. Groups' quality features.
+    10. Nodes' quality features.
+    11. Time for each of the above.
+
+* Experiments script.
+
+    Execute the following:
+
+    1. Experiment one:
+
+        Compares the impact of the different policies of recommending edges in 10 rounds. 1 round is the addition of 1 edge to all source nodes.
+
+    1. Experiment two:
+
+        Computes Acceptance Probabilities
+
+    1. Experiment three:
+
+        Computes the red personalized pagerank for each round.
+   
+
+
 
 1. Experiment Zero: Compares  greedy with fast greedy algorithm for single source. It computes red pagerank ratio rise for both algorithms for 100 random source nodes and the 100 best by initial pagerank nodes. Then it takes the average red pagerank ratio for the two groups. For each source node it creates two files: "<node_id>_redPagerankGreedy.txt" and "<node_id>_redPagerankFastGreedy.txt".
     
@@ -30,7 +81,7 @@ All the experiments were made in linux Ubuntu. To compile cpp we used gcc compil
 
     **Note:** We then take the average red pagerank ratio for each group (random, best by pagerank).
 
-1. Experiment Two: Compares the effect of adding edges based on recommendation score, on greatest red pagerank gain score (fast greedy algorithm) or on greatest expected red pagerank gain in average recommendation score, networks red pagerank ratio and expected red pagerank gain. It computes the forth mentioned scores for 100 random source nodes, for the 100 best by pagerank nodes and takes the average of them for each group (random, by pagerank).
+2. Experiment Two: Compares the effect of adding edges based on recommendation score, on greatest red pagerank gain score (fast greedy algorithm) or on greatest expected red pagerank gain in average recommendation score, networks red pagerank ratio and expected red pagerank gain. It computes the forth mentioned scores for 100 random source nodes, for the 100 best by pagerank nodes and takes the average of them for each group (random, by pagerank).
 
     - Compile:
         >` g++ --std=c++11 -Wall -Wextra -O3 -fopenmp -o experimentTwo.out graph.cpp pagerank.cpp experimentTwo.cpp`
@@ -38,7 +89,7 @@ All the experiments were made in linux Ubuntu. To compile cpp we used gcc compil
     - Execute: 
         >` ./experimentTwo.out`
 
-1. Fast greedy single source (independent executable):
+3. Fast greedy single source (independent executable):
     
     - Compile:
         >` g++ --std=c++11 -Wall -Wextra -O3 -fopenmp -o singleSourceFastGreedy.out graph.cpp pagerank.cpp edgeAddition.cpp singleSourceFastGreedy.cpp`
@@ -48,33 +99,7 @@ All the experiments were made in linux Ubuntu. To compile cpp we used gcc compil
 
     **Note:** You will also find the algorithm as a static method in EdgeAddition class
 
-* Pre experiments script.
 
-    Computes the following:
-    
-    1. Initial pagerank.
-    1. Red absorbing probabilities.
-    1. Node2vec Classifier.
-    1. Node2vec embeddings.
-    1. Source nodes (10% random, 100 best red, 100 best blue).
-    1. Edges' scores.
-    1. Candidate edges distances.
-    1. Network's quality features.
-    1. Groups' quality features.
-    1. Nodes' quality features.
-    1. Time for each of the above.
-
-* Experiments script.
-
-    Execute the following:
-
-    1. Experiment one:
-
-        Compares the impact of the different policies of recommending edges in 10 epochs. 1 epoch is the addition of 1 edge to all source nodes.
-
-    1. Experiment two:
-
-        Compares the (Greedy vs Fast Greedy)...Pending...
 
 * Post experiment script.
 
