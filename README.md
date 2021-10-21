@@ -1,7 +1,5 @@
 ## fairPRrec
 
-### General Informations.
-
 This repository has been created to distribute freely our implementations of the algorithms described in the "Link Recommendations for PageRank Fairness" paper. It also includes the datasets described and used in the forthmentioned paper plus some extra dataset from various resources.
 
 ### Dependencies:<br/>
