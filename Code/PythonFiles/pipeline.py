@@ -6,7 +6,7 @@ from time import time
 
 rounds = "10"
 distance = "4"
-path = "/mnt/sdb1/tsiou/FairRec/Code/"
+path = ""
 
 with open("experiment_parameters.txt", "w") as file_one:
     file_one.write(f"rounds: {rounds}\n")

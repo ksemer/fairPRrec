@@ -14,9 +14,10 @@ All the experiments were made in linux Ubuntu. To compile cpp we used gcc compil
 ### Repository Structure:<br/>
    - Code
        - Cpp_files
+       - Experiment Scripts
        - Python_files
    - Datasets
-   - Experiments
+   - Notebooks
 
 ### Experiments:<br/> 
 The following refers to the steps needed to compute the results reported in the paper.
@@ -26,24 +27,31 @@ Note. Each cpp and python file is documented. Please open the files for more det
       1. >`./getPagerank.out`
 2. Get random source nodes and save them into "random_source_nodes.csv"
    1. copy "getSourceNodes.py" from the Python_files and execute: 
-      1. >`python3 getSourceNodes.py -p "random" -a "source_nodes_ratio" -o "random_source_nodes.csv"`  
+    >`python3 getSourceNodes.py -p "random" -a "source_nodes_ratio" -o "random_source_nodes.csv"`  
 3. Get Candidate Edges and save them into "candidate_edges.csv"
-      1. >`python3 getCandidateEdges.py -i random_source_nodes.csv -d "distance" -o "candidate_edges.csv"`  
+    >`python3 getCandidateEdges.py -i random_source_nodes.csv -d "distance" -o "candidate_edges.csv"`  
 4. Converts the graph file to compatible form for positive sample. We specify the graph file, the output file and the number of the sample expressed as percentage of the number of the graph's edges.
-      1. >`python3 getPositiveEdgeSample.py -g "out_graph.txt" -p, "100", -o, "positive_edge_sample.csv`  
+    >`python3 getPositiveEdgeSample.py -g "out_graph.txt" -p, "100", -o, "positive_edge_sample.csv`  
 5. Get negative edges sample.
-      1. >`python3 getNegativeEdgeSample.py -g "out_graph.txt" -p "100" -o "negative_edge_sample.csv`  
+    >`python3 getNegativeEdgeSample.py -g "out_graph.txt" -p "100" -o "negative_edge_sample.csv`  
 6. Get Node embeddings
    1. node2vec
-      1. >`python3 getNodeEmbeddings.py -g "out_graph.txt" -p, "node2vec" --l "distance" -pp "1.0", --qp "1.0" -o, "node2vec_node_embeddings.csv`  
-   1. FairWalk
-      1. >`python3 getNodeEmbeddings.py -g "out_graph.txt" -p, "fairwalk" --l "distance" -pp "1.0", --qp "1.0" -o, "fairwalk_node_embeddings.csv`  
-7. Get Node embeddings
+     >`python3 getNodeEmbeddings.py -g "out_graph.txt" -p, "node2vec" --l "distance" -pp "1.0", --qp "1.0" -o, "node2vec_node_embeddings.csv`  
+   2. FairWalk
+      >`python3 getNodeEmbeddings.py -g "out_graph.txt" -p, "fairwalk" --l "distance" -pp "1.0", --qp "1.0" -o, "fairwalk_node_embeddings.csv`  
+7. Get Edge embeddings
    1. node2vec
-      1. >`python3 getNodeEmbeddings.py -g "out_graph.txt" -p, "node2vec" --l "distance" -pp "1.0", --qp "1.0" -o, "node2vec_node_embeddings.csv`  
-   1. FairWalk
-      1. >`python3 getNodeEmbeddings.py -g "out_graph.txt" -p, "fairwalk" --l "distance" -pp "1.0", --qp "1.0" -o, "fairwalk_node_embeddings.csv`  
-We also included in the Experiments folder three python files that contain the execution pipeline for computing the results reported in the paper. 
+      >`python3 getEdgeEmbeddings.py -l "node2vec_node_embeddings.csv" -e, "candidate_edges.csv" -p "hadamrt" -o "candidate_edges_node2vec_embeddings.csv`  
+     >`python3 getEdgeEmbeddings.py -l "node2vec_node_embeddings.csv" -e, "positive_edge_sample.csv" -p "hadamrt" -o "positive_sample_edges_node2vec_embeddings.csv` 
+     >`python3 getEdgeEmbeddings.py -l "node2vec_node_embeddings.csv" -e, "negative_edge_sample.csv" -p "hadamrt" -o "negative_sample_edges_node2vec_embeddings.csv`   
+   2. FairWalk
+      >`python3 getEdgeEmbeddings.py l "fairwalk_node_embeddings.csv" -e, "candidate_edges.csv" -p "hadamrt" -o, "candidate_edges_fairwalk_embeddings.csv`  
+     >`python3 getEdgeEmbeddings.py -l "fairwalk_node_embeddings.csv" -e, "positive_edge_sample.csv" -p "hadamrt" -o "positive_sample_edges_fairwalk_embeddings.csv`  
+     >`python3 getEdgeEmbeddings.py -l "fairwalk_node_embeddings.csv" -e, "negative_edge_sample.csv" -p "hadamrt" -o "negative_sample_edges_node2vec_embeddings.csv`
+8. Get node2vec and fairwalk classifier
+    >`python3 getClassifier.py -p "positive_sample_edges_node2vec_embeddings.csv" -n "negative_sample_edges_node2vec_embeddings.csv" -o "node2vec_recommender.sav"`
+
+We also included in the ExperimentScripts folder three python files that contain the execution pipeline for computing the results reported in the paper. 
 
 * Pre experiments script.
 
@@ -76,52 +84,6 @@ We also included in the Experiments folder three python files that contain the e
     1. Experiment three:
 
         Computes the red personalized pagerank for each round.
-   
-
-
-
-1. Experiment Zero: Compares  greedy with fast greedy algorithm for single source. It computes red pagerank ratio rise for both algorithms for 100 random source nodes and the 100 best by initial pagerank nodes. Then it takes the average red pagerank ratio for the two groups. For each source node it creates two files: "<node_id>_redPagerankGreedy.txt" and "<node_id>_redPagerankFastGreedy.txt".
-    
-    - Compile:
-        >` g++ --std=c++11 -Wall -Wextra -O3 -fopenmp -o experimentZero.out graph.cpp pagerank.cpp experimentZero.cpp`
-
-    - Execute: 
-        >` ./experimentZero.out`
-
-    **Note:** We then take the average red pagerank ratio for each group (random, best by pagerank).
-
-2. Experiment Two: Compares the effect of adding edges based on recommendation score, on greatest red pagerank gain score (fast greedy algorithm) or on greatest expected red pagerank gain in average recommendation score, networks red pagerank ratio and expected red pagerank gain. It computes the forth mentioned scores for 100 random source nodes, for the 100 best by pagerank nodes and takes the average of them for each group (random, by pagerank).
-
-    - Compile:
-        >` g++ --std=c++11 -Wall -Wextra -O3 -fopenmp -o experimentTwo.out graph.cpp pagerank.cpp experimentTwo.cpp`
-
-    - Execute: 
-        >` ./experimentTwo.out`
-
-3. Fast greedy single source (independent executable):
-    
-    - Compile:
-        >` g++ --std=c++11 -Wall -Wextra -O3 -fopenmp -o singleSourceFastGreedy.out graph.cpp pagerank.cpp edgeAddition.cpp singleSourceFastGreedy.cpp`
-
-    - Execute: 
-        >` ./singleSourceFastGreedy.out -s <source node id\> -n <numberOfEdges\>`
-
-    **Note:** You will also find the algorithm as a static method in EdgeAddition class
-
-
-
-* Post experiment script.
-
-    Computes the following:
-
-    1. Selected edges distances.
-
-* Analysis script.
-
-    Produces the following:
-
-    1. Pending.
-
 Datasets Description.
 ---------
 Datasets provided have been collected from various resources. They are graphs with a binary attribute for each node. Every dataset is consisted of two txt files. "out_graph.txt" and "out_community.txt".

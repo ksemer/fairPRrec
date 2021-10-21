@@ -1,6 +1,5 @@
 """ Calculates group(red, blue) quality features.
 Quality features: homophily, ratio in network.
-TODO: Move inside log from getGroupHomophily.
 """
 import numpy as np
 import networkx as nx
