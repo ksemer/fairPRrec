@@ -67,13 +67,13 @@ Note. Each cpp and python file is documented. Please open the files for more det
     * >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "multiplicative-hybrid" -f "e-frec.csv" -c "node2vec_scores.csv" -o "e-prec.csv"`
 12. Compute the PageRank Fairness per round
     * rounds: 10, algo_scores: the file computed in steps 10 and 11.Also have a look at `experiments_pipeline.py`
-    * >`python3 experiment_one_fairness.py -r "rounds" -s "algo_scores" -o "sc_output
+    * >`python3 experiment_one_fairness.py -r "rounds" -s "algo_scores" -o "sc_output`
 13. Compute Acceptance Probability per round
     * rounds: 10, algo_scores: the file computed in steps 10 and 11.Also have a look at `experiments_pipeline.py`
-    * >`python3 experiment_two_acceptance.py -r "rounds" -s "algo_scores" -n "node2vec_scores" -o "accept_prob.csv"
+    * >`python3 experiment_two_acceptance.py -r "rounds" -s "algo_scores" -n "node2vec_scores" -o "accept_prob.csv"`
 14. Compute the personalized PageRank Fairness per round
     * rounds: 10, algo_scores: the file computed in steps 10 and 11.Also have a look at `experiments_pipeline.py`
-    * >`python3 experiment_three_acceptance.py -r "rounds" -s "algo_scores" -o "sc_personalized_output
+    * >`python3 experiment_three_acceptance.py -r "rounds" -s "algo_scores" -o "sc_personalized_output`
 
  - We also included in the ExperimentScripts folder three python files that contain the execution pipeline for computing the results reported in the paper. 
 
