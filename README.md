@@ -24,7 +24,7 @@ The following refers to the steps needed to compute the results reported in the 
 Note. Each cpp and python file is documented. Please open the files for more details.
 1. Compute Nodes PageRank
    1. Copy "getPageRank.out" from the Cpp_files and execute: 
-      1. >`./getPagerank.out`
+      >`./getPagerank.out`
 2. Get random source nodes and save them into "random_source_nodes.csv"
    1. copy "getSourceNodes.py" from the Python_files and execute: 
     >`python3 getSourceNodes.py -p "random" -a "source_nodes_ratio" -o "random_source_nodes.csv"`  
@@ -55,16 +55,21 @@ Note. Each cpp and python file is documented. Please open the files for more det
     * >`python3 getRedAbsorbingProbs.py" -g "out_graph.txt" -o "red_absorbing_probabilities.csv"`
 
 10. Get link recommendation algorithms fairness scores
-    * Adamic Adar: >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "adamic_adar" -o "adamic_adar_scores.csv"`
-    * Jaccard Coefficient: >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "jaccard-coefficient" -o "jaccard_coefficient_scores.csv"`
-    * Preferential Attachment: >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "preferential-attachment" -o "preferential_attachment_scores.csv"`
-    * Node2vec:  >`python3 getRecommendationScores.py -i "candidate_edges_node2vec_embeddings.csv" -p "from-classifier" -o "node2vec_scores.csv"`
-    * Fairwalk:  >`python3 getRecommendationScores.py -i "candidate_edges_fairwalk_embeddings.csv" -p "from-classifier" -c "fairwalk_recommender.sav" -o "node2vec_scores.csv"`
+    * Adamic Adar: 
+      >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "adamic_adar" -o "adamic_adar_scores.csv"`
+    * Jaccard Coefficient:  
+        >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "jaccard-coefficient" -o "jaccard_coefficient_scores.csv"`
+    * Preferential Attachment:  
+      >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "preferential-attachment" -o "preferential_attachment_scores.csv"`
+    * Node2vec:  
+      >`python3 getRecommendationScores.py -i "candidate_edges_node2vec_embeddings.csv" -p "from-classifier" -o "node2vec_scores.csv"`
+    * Fairwalk: 
+       >`python3 getRecommendationScores.py -i "candidate_edges_fairwalk_embeddings.csv" -p "from-classifier" -c "fairwalk_recommender.sav" -o "node2vec_scores.csv"`
 11. Get FREC, E-FREC, PREC, and E-PREC red pageranks
-    * >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "fair" -o "frec.csv"`
-    * >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "dyadic-fair" -o "e-frec.csv"`
-    * >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "multiplicative-hybrid" -f "frec.csv" -c "node2vec_scores.csv" -o "prec.csv"`
-    * >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "multiplicative-hybrid" -f "e-frec.csv" -c "node2vec_scores.csv" -o "e-prec.csv"`
+    *  >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "fair" -o "frec.csv"`
+    *  >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "dyadic-fair" -o "e-frec.csv"`
+    *  >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "multiplicative-hybrid" -f "frec.csv" -c "node2vec_scores.csv" -o "prec.csv"`
+    *  >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "multiplicative-hybrid" -f "e-frec.csv" -c "node2vec_scores.csv" -o "e-prec.csv"`
 12. Compute the PageRank Fairness per round
     * rounds: 10, algo_scores: the file computed in steps 10 and 11.Also have a look at `experiments_pipeline.py`
     * >`python3 experiment_one_fairness.py -r "rounds" -s "algo_scores" -o "sc_output`
