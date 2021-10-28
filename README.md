@@ -45,9 +45,9 @@ Note. Each cpp and python file is documented. Please open the files for more det
      * >`python3 getEdgeEmbeddings.py -l "node2vec_node_embeddings.csv" -e, "positive_edge_sample.csv" -p "hadamrt" -o "positive_sample_edges_node2vec_embeddings.csv` 
      * >`python3 getEdgeEmbeddings.py -l "node2vec_node_embeddings.csv" -e, "negative_edge_sample.csv" -p "hadamrt" -o "negative_sample_edges_node2vec_embeddings.csv`   
    2. FairWalk
-      * >`python3 getEdgeEmbeddings.py l "fairwalk_node_embeddings.csv" -e, "candidate_edges.csv" -p "hadamrt" -o, "candidate_edges_fairwalk_embeddings.csv`  
-      * >`python3 getEdgeEmbeddings.py -l "fairwalk_node_embeddings.csv" -e, "positive_edge_sample.csv" -p "hadamrt" -o "positive_sample_edges_fairwalk_embeddings.csv`  
-      * >`python3 getEdgeEmbeddings.py -l "fairwalk_node_embeddings.csv" -e, "negative_edge_sample.csv" -p "hadamrt" -o "negative_sample_edges_node2vec_embeddings.csv`
+     * >`python3 getEdgeEmbeddings.py -l "fairwalk_node_embeddings.csv" -e, "candidate_edges.csv" -p "hadamrt" -o, "candidate_edges_fairwalk_embeddings.csv`  
+     * >`python3 getEdgeEmbeddings.py -l "fairwalk_node_embeddings.csv" -e, "positive_edge_sample.csv" -p "hadamrt" -o "positive_sample_edges_fairwalk_embeddings.csv`  
+     * >`python3 getEdgeEmbeddings.py -l "fairwalk_node_embeddings.csv" -e, "negative_edge_sample.csv" -p "hadamrt" -o "negative_sample_edges_node2vec_embeddings.csv`
 8. Get node2vec and fairwalk classifier
      * >`python3 getClassifier.py -p "positive_sample_edges_node2vec_embeddings.csv" -n "negative_sample_edges_node2vec_embeddings.csv" -o "node2vec_recommender.sav"`
      * >`python3 getClassifier.py -p "positive_sample_edges_fairwalk_embeddings.csv" -n "negative_sample_edges_fairwalk_embeddings.csv" -o "fairwalk_recommender.sav"`
