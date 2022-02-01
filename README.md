@@ -30,15 +30,29 @@ All the experiments were made in linux Ubuntu. To compile cpp we used gcc compil
 
 ### How to use:<br/>
 
-1. Get a set of source nodes that you are interested in recommedning edges to them. Save them in `.csv` file. Check file conventions at the end of the README.
+1. Get a set of source nodes that you are interested in recommedning edges to them. Save them in `.csv` file. Check file conventions section at the end of the README.
    
 For a random set of nodes check step 2 at **Experiments** section.
 
-2. Get a set of candidate edges you want to evaluate for each source node and save them in a `.csv` file. Check file conventions at the end of the README.
+2. Get a set of candidate edges you want to evaluate for each source node and save them in a `.csv` file. Check file conventions section at the end of the README.
 
 For a set of candidate edges based on the distance of the source node check step 3 at experiments session.
 
-3. 
+3. Get FREC scores for candidate edges:
+    *  >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "fair" -o "frec.csv"`
+
+4. Get E-FREC scores for candidate edges:
+    *  >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "dyadic-fair" -o "e-frec.csv"`
+
+To compute the Hybrid algorithms you need to use a recommendation algorithm of your choise and save the edge scores in a `.csv` file. Check file conventions section at the end of the README.
+
+If you like to use node2vec or Fairwalk you can use our implementations. Check steps 4 to 8 of **Experiments** section.
+
+1. Get PREC score:
+    *  >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "multiplicative-hybrid" -f "frec.csv" -c "<recommendation_algorithm>_scores.csv" -o "prec.csv"`
+
+2. Get E-PREC score:
+    *  >`python3 getRecommendationScores.py -i "candidate_edges.csv" -p "multiplicative-hybrid" -f "e-frec.csv" -c "<recommendation_algorithm>_scores.csv" -o "e-prec.csv"`
 
 ### Experiments:<br/> 
 The following refers to the steps needed to compute the results reported in the paper.
@@ -141,6 +155,7 @@ Note. Each cpp and python file is documented. Please open the files for more det
 2. Edge file:
 3. Source nodes file:
 4. Candidate edges file:
+5. Edge recommendation scores file:
 
 Datasets Description.
 ---------
