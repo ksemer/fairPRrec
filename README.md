@@ -30,7 +30,15 @@ All the experiments were made in linux Ubuntu. To compile cpp we used gcc compil
 
 ### How to use:<br/>
 
-1. Get a set of source nodes that you are interested in recommedning edges to them. Save them in `.csv` file
+1. Get a set of source nodes that you are interested in recommedning edges to them. Save them in `.csv` file. Check file conventions at the end of the README.
+   
+For a random set of nodes check step 2 at **Experiments** section.
+
+2. Get a set of candidate edges you want to evaluate for each source node and save them in a `.csv` file. Check file conventions at the end of the README.
+
+For a set of candidate edges based on the distance of the source node check step 3 at experiments session.
+
+3. 
 
 ### Experiments:<br/> 
 The following refers to the steps needed to compute the results reported in the paper.
@@ -126,6 +134,14 @@ Note. Each cpp and python file is documented. Please open the files for more det
     1. Experiment three:
 
         Computes the red personalized pagerank for each round.
+
+### File conventions
+
+1. Graph file: 
+2. Edge file:
+3. Source nodes file:
+4. Candidate edges file:
+
 Datasets Description.
 ---------
 Datasets provided have been collected from various resources. They are graphs with a binary attribute for each node. Every dataset is consisted of two txt files. "out_graph.txt" and "out_community.txt".
