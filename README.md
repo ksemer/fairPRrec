@@ -2,7 +2,7 @@
 
 This repository has been created to distribute freely our implementations of the algorithms described in the ["Link Recommendations for PageRank Fairness"](https://github.com/ksemer/fairPRrec) paper. It also includes the datasets described and used in the forthmentioned paper plus some extra dataset from various resources.
 
-**"Link Recommendations for PageRank Fairness"** is a work of
+["Link Recommendations for PageRank Fairness"](https://github.com/ksemer/fairPRrec) is a work of
 
 Sotiris Tsioutsiouliklis (King Digital Entertainment) <br/>
 Konstantinos Semertzidis (IBM Research) </br>
