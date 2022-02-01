@@ -1,6 +1,13 @@
 ## fairPRrec
 
-This repository has been created to distribute freely our implementations of the algorithms described in the "Link Recommendations for PageRank Fairness" paper. It also includes the datasets described and used in the forthmentioned paper plus some extra dataset from various resources.
+This repository has been created to distribute freely our implementations of the algorithms described in the ["Link Recommendations for PageRank Fairness"](https://github.com/ksemer/fairPRrec) paper. It also includes the datasets described and used in the forthmentioned paper plus some extra dataset from various resources.
+
+**"Link Recommendations for PageRank Fairness"** is a work of
+
+Sotiris Tsioutsiouliklis (King Digital Entertainment)
+Konstantinos Semertzidis (IBM Research)
+Evaggelia Pitoura (Dept. of Computer Science & Engineering - University of Ioannina Greece)
+Panagitis Tsaparas (Dept. of Computer Science & Engineering - University of Ioannina Greece)
 
 ### Dependencies:<br/>
 - Python 3.
