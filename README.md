@@ -4,10 +4,10 @@ This repository has been created to distribute freely our implementations of the
 
 **"Link Recommendations for PageRank Fairness"** is a work of
 
-Sotiris Tsioutsiouliklis (King Digital Entertainment)
-Konstantinos Semertzidis (IBM Research)
-Evaggelia Pitoura (Dept. of Computer Science & Engineering - University of Ioannina Greece)
-Panagitis Tsaparas (Dept. of Computer Science & Engineering - University of Ioannina Greece)
+Sotiris Tsioutsiouliklis (King Digital Entertainment) <br/>
+Konstantinos Semertzidis (IBM Research) </br>
+Evaggelia Pitoura (Dept. of Computer Science & Engineering - University of Ioannina Greece) </br>
+Panagitis Tsaparas (Dept. of Computer Science & Engineering - University of Ioannina Greece) </br>
 
 The Paper is based in the notion of PageRank Fairness which is introduced in the ["Fairness-Aware PageRank"](https://arxiv.org/pdf/2005.14431.pdf)
 
