@@ -28,6 +28,10 @@ All the experiments were made in linux Ubuntu. To compile cpp we used gcc compil
    - Datasets
    - Notebooks
 
+### How to use:<br/>
+
+1. Get a set of source nodes that you are interested in recommedning edges to them. Save them in `.csv` file
+
 ### Experiments:<br/> 
 The following refers to the steps needed to compute the results reported in the paper.
 Note. Each cpp and python file is documented. Please open the files for more details.
