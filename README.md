@@ -9,6 +9,8 @@ Konstantinos Semertzidis (IBM Research)
 Evaggelia Pitoura (Dept. of Computer Science & Engineering - University of Ioannina Greece)
 Panagitis Tsaparas (Dept. of Computer Science & Engineering - University of Ioannina Greece)
 
+The Paper is based in the notion of PageRank Fairness which is introduced in the ["Fairness-Aware PageRank"](https://arxiv.org/pdf/2005.14431.pdf)
+
 ### Dependencies:<br/>
 - Python 3.
 - C++ 11.
